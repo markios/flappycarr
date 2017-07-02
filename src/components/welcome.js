@@ -4,10 +4,12 @@ import Events from '../lib/events';
 class Welcome {
   constructor() {
     const el = document.querySelector('.welcome_view');
+    this.el = el;
     this.UI = {
       playButton: el.querySelector('.js_play'),
       welcome: el.querySelector('.js_message'),
     }
+    this.handleEvents();
   }
 
   handleEvents() {

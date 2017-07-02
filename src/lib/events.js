@@ -6,7 +6,7 @@ var MicroEvents	= function(){};
      
       this._events[event].push(fct);
     },
-    unbind: function(event, fct){
+    off: function(event, fct){
       this._events = this._events || {};
       if( event in this._events === false  )	return;
       this._events[event].splice(this._events[event].indexOf(fct), 1);

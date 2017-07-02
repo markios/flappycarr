@@ -1,3 +1,6 @@
+
+const canvas = document.querySelector('#game');
+
 const World = {
   gravity: 2.8,
   resistance: 0.9,

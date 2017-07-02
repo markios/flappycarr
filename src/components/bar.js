@@ -1,10 +1,10 @@
 
-import World from './world';
+import World from './../data/world';
+import ctx from './../lib/context';
 
 class Bar {
-  constructor(posX, vel) {
-    const birdHeight = Bird.Height();
-
+  constructor(posX, vel, birdHeight) {
+    
     this.state = {
         x: posX,
         y: 0,
@@ -12,6 +12,7 @@ class Bar {
         tbH: 0,
         bbH: 0,
         boundary: 20,
+        color: 'yellowgreen',
         velocity: vel,
         delta: 4 * birdHeight, // min space between
     };
@@ -30,7 +31,7 @@ class Bar {
 
   render() {
     this.state.x -= this.state.velocity;
-    ctx.fillStyle = 'yellow';
+    ctx.fillStyle = this.state.color;
     ctx.fillRect(
       this.state.x,
       this.state.y,

@@ -1,3 +1,7 @@
+
+import World from '../data/world';
+import ctx from './../lib/context';
+
 class Bird {
     constructor() {
         this.state = {
@@ -6,14 +10,11 @@ class Bird {
             defaultLift: 25,
             x: 50,
             y: 0,
-            height: Bird.Height(), 
+            height: 20, 
             width: 20,    
         };
+        
         this.handleEvents();
-    }
-
-    static Height() {
-        return 20;
     }
 
     handleEvents() {
@@ -51,11 +52,11 @@ class Bird {
         this.state.lift = 0;
         ctx.fillStyle = 'hotpink';
         ctx.fillRect(
-                this.state.x, 
-                this.state.y,
-                this.state.height, 
-                this.state.width
-                );
+            this.state.x, 
+            this.state.y,
+            this.state.height, 
+            this.state.width
+            );
     }
 }
 

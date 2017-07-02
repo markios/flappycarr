@@ -1,61 +1,75 @@
     
-    const canvas = document.querySelector('#game');
-    const ctx = canvas.getContext("2d");
+import Events from './../lib/events';
+import ctx from './../lib/context';
+import Bird from './bird';
+import Obsticles from './obsticles';
 
-    class Game {
-        constructor() {
-            this.state = {
-                play: false,
-                score: 0,
-                over: false,
-                frames: 1000 / 30,
-            };
+const canvas = document.querySelector('#game');
+    
+class Game {
+    constructor() {
+        this.state = {
+            play: false,
+            delay: 1000,
+            score: 0,
+            over: false,
+            framesSpeed: 1000 / 30,
+        };
 
-            this.UI = {
-                el: document.querySelector('#start')
-            }
-        }
-
-        play() {
-            this.game = new Game();
-            this.bird = new Bird();
-            this.obs = new Obsticles(this.bird);
-            return this.state.play;
-        }
-
-        get score() {
-            return this.state.score;
-        }
-
-        set score(val) {
-            this.state.score = val;
-        }
-
-        gameOver() {
-            clearInterval(this.frames);
-            this.state.score;
-        }
-
-        runFrames() {
-            this.frames = setInterval(() => {
-                if (game.play) this.render();
-                ctx.stroke();
-            }, this.state.frames);
-        }
-
-        reset() {
-            ctx.beginPath();
-            ctx.fillStyle = '#000';
-            ctx.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight);
-        }
-
-        render() {
-            this.renderReset();
-            this.bird.onFrame();
-            this.obs.onFrame();
-        }
-
+        this.renderReset();
+        this.handleEvents();
     }
 
-export default Game;
+    handleEvents() {
+        Events.on('game/start', this.onGameStart.bind(this));
+        Events.on('game/end', this.onGameEnd.bind(this));
+    }
+
+    play() {
+        this.state.play = true;
+        this.bird = new Bird();
+        this.obs = new Obsticles(this.bird);
+        // start the frame loop
+        this.runFrames();
+    }
+
+    get score() {
+        return this.state.score;
+    }
+
+    set score(val) {
+        this.state.score = val;
+    }
+
+    onGameStart() {
+        setTimeout(this.play.bind(this), this.state.delay);
+    }
+
+    onGameEnd() {
+        clearInterval(this.frames);
+        Events.trigger('game/over');
+    }
+
+    runFrames() {
+        this.frames = setInterval(function() {
+            if (this.state.play) this.render();
+            ctx.stroke();
+        }.bind(this), this.state.framesSpeed);
+    }
+
+    renderReset() {
+        ctx.beginPath();
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+    }
+
+    render() {
+        this.renderReset();
+        this.bird.onFrame();
+        this.obs.onFrame();
+    }
+
+}
+
+export default new Game();
 

@@ -1,6 +1,7 @@
 
 import Bar from './bar';
 import World from '../data/world';
+import ctx from './../lib/context';
 
 class Obsticles {
   constructor(bird){
@@ -24,7 +25,7 @@ class Obsticles {
           (bars[bars.length - 1].state.x + this.state.barSpacer)
           : World.width;
 
-      bars.push(new Bar(posX, this.state.barVelocity));
+      bars.push(new Bar(posX, this.state.barVelocity, this.bird.state.height));
   }
 
   manageBars() {
