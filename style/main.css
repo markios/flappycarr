@@ -1,14 +1,94 @@
+:root {
+  --main-bg-color: #ddd;
+  --color-black: #313131;
+  --color-white: white;
+  --color-blue: steelblue;
+  --color-pink: hotpink;
+  --color-purple: fuchsia;
+  --color-red: crimson;
+  --color-green: yellowgreen;
+  --main-font: Helvetica Neue, Helvetica, sans-serif;
+  --header-font: 'Monoton', cursive;
+}
+
 html, body {
   margin: 0;
   padding: 0; 
-}
-
-body {
   width: 100%;
   height: 100%;
 }
 
-canvas {
+body {
+  background-color: var(--main-bg-color);
+  font-family: var(--main-font);
+}
+
+.container {
   display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  max-height: 600px;
+  max-width: 500px;
+  position: relative;
+}
+
+canvas {
+  display: none;
   margin:0 auto;
 }
+
+.welcome_view {
+  background-color: var(--color-black);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+}
+
+.welcome_view h1 {
+  margin: 0 0 50px;
+  font-size: 50px;
+  color: var(--color-green);
+  font-family: var(--header-font);
+}
+
+.welcome_view_message {
+  margin: 0 0 50px;
+}
+
+.btn {
+  border-radius: 10px;
+  background-color: var(--color-green);
+  color: var(--color-white);
+  text-align: center;
+  height: 50px;
+  width: 100px;
+  font-size: 15px;
+  font-family: var(--header-font);
+  border: none;
+}
+
+/* animations */
+
+.anim_pulse {
+  animation-duration: 1.5s;
+  animation-name: pulse;
+  animation-iteration-count: infinite;
+}
+
+@keyframes pulse {
+  0 {
+    transform: scale(1); 
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+

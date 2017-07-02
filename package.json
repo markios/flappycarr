@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "browserify src/main.js -o build/bundle.js -t [ babelify --presets [ es2015 stage-0 ] ]"
+    "build": "browserify src/main.js -o build/bundle.js -t [ babelify --presets [ es2015 stage-0 ] ]",
+    "dev": "python -m SimpleHTTPServer 8000"
   },
   "author": "Mark Kellett",
   "license": "ISC",
