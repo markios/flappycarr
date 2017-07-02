@@ -1,0 +1,18 @@
+{
+  "name": "flappygrew",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "browserify src/main.js -o build/bundle.js -t [ babelify --presets [ es2015 stage-0 ] ]"
+  },
+  "author": "Mark Kellett",
+  "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babelify": "^7.3.0",
+    "browserify": "^14.4.0"
+  }
+}
