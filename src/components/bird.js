@@ -4,14 +4,26 @@ import ctx from './../lib/context';
 
 class Bird {
     constructor() {
+        
+        const car = document.querySelector('#car');
+        
+        this.UI = {
+            car,
+        };
+        
+        const x = 50;
+        const width = car.clientWidth;
+        const height = car.clientHeight;
+
         this.state = {
             velocity: 0,
             lift: 0,
             defaultLift: 25,
-            x: 50,
-            y: 0,
-            height: 20, 
-            width: 20,    
+            realX: x + width, 
+            x,
+            y: 1,
+            width,
+            height,
         };
         
         this.handleEvents();
@@ -37,26 +49,26 @@ class Bird {
     }
 
     render() {
-        if (this.state.y < World.bottom - this.state.height) {
-            // inc velocity
-            this.state.velocity += World.gravity;
-            // add in lift if present
-            this.state.velocity -= this.state.lift;
-            // add in a resistance (like air)
-            this.state.velocity *= World.resistance;
+        // inc velocity
+        this.state.velocity += World.gravity;
+        // add in lift if present
+        this.state.velocity -= this.state.lift;
+        // add in a resistance (like air)
+        this.state.velocity *= World.resistance;
 
-            // update y position
-            this.state.y += this.state.velocity;
-        }
+        // update y position
+        this.state.y += this.state.velocity;
+        this.state.realY = this.state.y + this.state.height;
+    
 
         this.state.lift = 0;
-        ctx.fillStyle = 'hotpink';
-        ctx.fillRect(
+        ctx.drawImage(
+            this.UI.car,
             this.state.x, 
             this.state.y,
-            this.state.height, 
-            this.state.width
-            );
+            this.state.width,
+            this.state.height
+        );
     }
 }
 

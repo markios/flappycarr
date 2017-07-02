@@ -7,8 +7,8 @@ class Obsticles {
   constructor(bird){
       this.state = {
           bars: [],
-          maxBars: 2,
-          barSpacer: 200,
+          maxBars: 3,
+          barSpacer: 300,
           barVelocity: 5,
       };
 

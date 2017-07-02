@@ -14,7 +14,7 @@ class Bar {
         boundary: 20,
         color: 'yellowgreen',
         velocity: vel,
-        delta: 4 * birdHeight, // min space between
+        delta: 3 * birdHeight, // min space between
     };
 
     this.calcDimensions();
