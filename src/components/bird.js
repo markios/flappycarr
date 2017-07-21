@@ -33,6 +33,11 @@ class Bird {
         document.addEventListener('keypress', this.onKeyPress.bind(this));
         document.addEventListener('touchstart', this.onTouch.bind(this))
     }
+    
+    setMoveIndex() {
+        const { moveIndex, movement } = this.state;
+        this.state.moveIndex = moveIndex == movement.length ? 0 : moveIndex + 1;
+    }
 
     onKeyPress(e) {
         if (e.key === " ") {
@@ -49,6 +54,7 @@ class Bird {
     }
 
     render() {
+        const { movement, moveIndex } = this.state;
         // inc velocity
         this.state.velocity += World.gravity;
         // add in lift if present
@@ -60,7 +66,6 @@ class Bird {
         this.state.y += this.state.velocity;
         this.state.realY = this.state.y + this.state.height;
     
-
         this.state.lift = 0;
         ctx.drawImage(
             this.UI.car,
