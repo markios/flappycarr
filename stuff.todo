@@ -7,3 +7,14 @@ Items
 ☐ Game over
 ☐ Restart
 ☐ High Scores
+
+Notes
+
+How many starts do we want?
+Do we just randomize them according to 3 specific widths? each of which will have a specific
+velocity?
+
+Dispersion
+
+When the game loads we want them just there and to start moving. However for every frame 
+after the first we want to move them per frame. And create them off canvas
