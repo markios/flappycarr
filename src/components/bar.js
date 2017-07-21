@@ -4,7 +4,6 @@ import ctx from './../lib/context';
 
 class Bar {
   constructor(posX, vel, birdHeight) {
-    
     this.state = {
         x: posX,
         y: 0,
@@ -27,10 +26,16 @@ class Bar {
 
     const botP = Math.random();
     this.state.bbH = botP * ((World.bottom - this.state.tbH) - this.state.delta);
+
+    this.state.safeZone = {
+       y: this.state.tbH,
+       realY: World.bottom - this.state.bbH,
+    }
   }
 
   render() {
     this.state.x -= this.state.velocity;
+    this.state.realX = this.state.x + this.state.bW;
     ctx.fillStyle = this.state.color;
     ctx.fillRect(
       this.state.x,

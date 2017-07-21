@@ -58,22 +58,24 @@ class Game {
         const bars = this.obs.state.bars;
         let collided = false;
 
-        const notHitBar = bars.every(bar => {
-            const prop = bar.state;
-            console.log(`${birdPosition.realX} < ${prop.x} && ${birdPosition.y} > ${prop.tbH}`);
-            console.log(birdPosition.realX < prop.x && birdPosition.realY < (World.bottom - this.state.bbH));
-            return birdPosition.realX < prop.x && (birdPosition.realX >= prop.x && birdPosition.y > prop.tbH)
-                && birdPosition.realX < prop.x && birdPosition.realY < (World.bottom - this.state.bbH)
-        });
+        const barsCollided = () => {
+            return !bars.every(bar => {
+                const barPosition = bar.state;
+                // if the bird is before or after the bar its all good
+                const awayFromBar = (birdPosition.realX < barPosition.x || birdPosition.x > barPosition.realX);
+                // if the bird is in the bar, is it in the gap?
+                const inSafeZone = birdPosition.y > barPosition.safeZone.y && birdPosition.realY < barPosition.safeZone.realY;
+                return awayFromBar || inSafeZone;
+            });
+        }
 
         // detect top
         if (birdPosition.y <= 0) collided = true;
 
         // detect bottom
-        else if (birdPosition.y + birdPosition.height >= World.bottom) collided = true;
+        else if (birdPosition.realY >= World.bottom) collided = true;
         
-        // detect bar hit
-        else if (! notHitBar) collided = true;
+        else if (barsCollided()) collided = true;
 
         if (collided) this.gameEnd();
     }
