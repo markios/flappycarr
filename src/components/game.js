@@ -4,6 +4,7 @@ import ctx from './../lib/context';
 import Bird from './bird';
 import World from '../data/world';
 import Obsticles from './obsticles';
+import Background from './background';
 
 const canvas = document.querySelector('#game');
     
@@ -30,6 +31,7 @@ class Game {
         this.bird = new Bird();
         this.obs = new Obsticles(this.bird);
         // start the frame loop
+        this.background = new Background();
         this.runFrames();
     }
 
@@ -100,6 +102,7 @@ class Game {
 
     render() {
         this.renderReset();
+        this.background.onFrame();
         this.bird.onFrame();
         this.obs.onFrame();
     }
